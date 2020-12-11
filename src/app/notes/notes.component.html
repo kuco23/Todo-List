@@ -1,0 +1,16 @@
+<div>
+  <div class='new-note-container'>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <button id='saveButton' (click)="postNote()" class="btn btn-outline-secondary" type="button">save note</button>
+      </div>
+      <textarea [(ngModel)]="syncnote" class="form-control col-sm-12"></textarea>
+    </div>
+  </div>
+
+  <div class='notes-container' *ngIf="addedNotes.length">
+    <div *ngFor="let note of addedNotes">
+      <app-note (destroySentinel)="deleteNote(note.id)" [note]="note"></app-note>
+    </div>
+  </div>
+</div>
