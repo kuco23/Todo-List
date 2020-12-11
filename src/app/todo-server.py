@@ -20,9 +20,6 @@ cursor = connection.cursor()
 cursor.execute(make_table)
 connection.commit()
 
-cursor.execute('DELETE FROM notes WHERE 1')
-connection.commit()
-
 def allowCors(fun):
     def decor(*args, **kwargs):
         response.headers['Access-Control-Allow-Origin'] = '*'
