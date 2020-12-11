@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+		"./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -59,11 +60,12 @@
             }
           }
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "todo-list:build"
-          },
+    "serve": {
+            "builder": "@angular-devkit/build-angular:dev-server",
+            "options": {
+                "browserTarget": "todo-list:build",
+                "proxyConfig": "src/proxy.conf.json"
+            },
           "configurations": {
             "production": {
               "browserTarget": "todo-list:build:production"
