@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Note } from '../note.interface';
 import { ApiService } from '../api.service';
 
@@ -9,7 +10,11 @@ import { ApiService } from '../api.service';
 })
 export class NotesComponent implements OnInit {
   @Input() public addedNotes: Note[] = [];
-  public syncnote: string = "";
+
+  newNoteForm = new FormGroup({
+    content: new FormControl("", [Validators.required]),
+    date: new FormControl("", [Validators.required])
+  })
 
   constructor(private apiService: ApiService) { }
 
@@ -20,6 +25,7 @@ export class NotesComponent implements OnInit {
   getNotes(): void {
     this.apiService.getNotes().subscribe(
       (resp:Note[]) => {
+        console.log(resp);
         for (let note of resp)
           this.addedNotes.push(note);
       }
@@ -27,14 +33,15 @@ export class NotesComponent implements OnInit {
   }
 
   postNote(): void {
-    if (!this.syncnote.length) return;
-    this.apiService.postNote(1, this.syncnote).subscribe(
+    if (this.newNoteForm.valid) {
+      let vals = this.newNoteForm.value;
+      this.apiService.postNote(1, vals.content, vals.date).subscribe(
       (resp:Note) => {
         this.addedNotes.unshift(resp);
         this.addedNotes.push();
-        this.syncnote = "";
-      }
-    );
+        this.newNoteForm.patchValue({content:"", date:""});
+      });
+    }
   }
 
   deleteNote(noteId): void {

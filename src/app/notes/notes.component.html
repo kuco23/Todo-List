@@ -1,16 +1,19 @@
 <div>
+
   <div class='new-note-container'>
-    <div class="input-group">
+    <div class="input-group" [formGroup]='newNoteForm'>
       <div class="input-group-prepend">
-        <button id='saveButton' (click)="postNote()" class="btn btn-outline-secondary" type="button">save note</button>
+        <button (click)="postNote()" class="btn btn-dark">Submit</button>
       </div>
-      <textarea [(ngModel)]="syncnote" class="form-control col-sm-12"></textarea>
+        <input type='text' placeholder="Write a note" class="form-control col-sm-10" formControlName='content' />
+        <input type="date" class='form-control col-sm-2' formControlName='date' />
     </div>
   </div>
 
-  <div class='notes-container' *ngIf="addedNotes.length">
+  <div class='col-sm-12' *ngIf="addedNotes.length">
     <div *ngFor="let note of addedNotes">
       <app-note (destroySentinel)="deleteNote(note.id)" [note]="note"></app-note>
     </div>
   </div>
+
 </div>

@@ -1,22 +1,18 @@
-<div class='note-container col-sm-12'>
-  <div>
-    <span class='orange'>By</span>
-    {{ note.userId }}
-    <span class='orange'>on</span>&nbsp;
-    <span [innerHTML]="formatDate(note.timestamp)"></span>
+
+<div class="bg-darker text-white m-2 p-3 jumbotron">
+    <p [innerHTML]='formatNoteData()'></p>
+    <div class="well border-dark m-4 p-3 bg-darker text-break">
+      {{ note.content }}
+    </div>
+    <div>
+      <button class='btn btn-dark mr-2' (click)='noteUpdateModal(updatemodal)'>
+        <fa-icon [icon]="penIcon"></fa-icon> &nbsp; update
+      </button>
+      <button class="btn btn-dark mr-2" (click)="noteDeleteModal(deletemodal)">
+        <fa-icon [icon]="crossIcon"></fa-icon> &nbsp; delete
+      </button>
+    </div>
   </div>
-  <div id='note-content'>
-    {{ note.content }}
-  </div>
-  <div id='note-content-buttons'>
-    <button (click)="noteUpdateModal(updatemodal)" type="button" class="btn btn-default btn-sm">
-      <fa-icon [icon]="penIcon"></fa-icon> &nbsp; update
-    </button>
-    <button (click)="noteDeleteModal(deletemodal)" type="button" class="btn btn-default btn-sm">
-      <fa-icon [icon]="crossIcon"></fa-icon> &nbsp; delete
-    </button>
-  </div>
-</div>
 
 <ng-template #updatemodal let-modal>
   <div class="modal-header">

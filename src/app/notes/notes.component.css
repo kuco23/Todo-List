@@ -1,19 +1,3 @@
 div.new-note-container {
   margin: 2rem;
 }
-
-#saveButton:hover {
-  border: 1px solid white;
-  color: white;
-  background-color: transparent;
-}
-
-div.notes-container {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: left;
-}
-
-div.notes-container > div {
-  margin: 0.5rem 0 0.5rem 0;
-}

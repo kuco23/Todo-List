@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS notes (
     id INTEGER PRIMARY KEY,
     userId INTEGER NOT NULL,
     content TEXT NOT NULL,
+    expirationDate TEXT NOT NULL,
     timestamp TEXT NOT NULL
 )
 """
@@ -37,24 +38,21 @@ def allowCors(fun):
 def note():
     cursor.execute('SELECT * FROM notes')
     rows = cursor.fetchall()
-    cols = ['id', 'userId', 'content', 'timestamp']
+    cols = ['id', 'userId', 'content', 'expirationDate', 'timestamp']
     return json.dumps([dict(zip(cols, row)) for row  in rows])
-
-@get('/note/<id:int>')
-@allowCors
-def noteId(**params):
-    cursor.executemany(f'SELECT * FROM notes WHERE id=?', [params['id']])
-    rows = cursor.fetchall()
-    cols = ['id', 'userId', 'content', 'timestamp']
-    return json.dumps([dict(zip(cols, row)) for row in rows])
 
 @post('/note/new')
 @allowCors
 def noteNew():
     data_id, data, date = keyGen(), request.json, str(dt.now())
     cursor.executemany("""
-        INSERT INTO notes (id, userId, content, timestamp) VALUES (?,?,?,?)
-        """, [(data_id, data['userId'], data['content'], date)]
+        INSERT INTO notes
+        (id, userId, content, expirationDate, timestamp)
+        VALUES (?,?,?,?,?)
+        """, [(
+            data_id, data['userId'],
+            data['content'], data['expirationDate'], date
+        )]
     )
     connection.commit()
     return json.dumps({'id': data_id, 'timestamp': date, **data})

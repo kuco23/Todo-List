@@ -23,11 +23,10 @@ export class NoteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  formatDate(date): string {
-    let s = date.split(' ');
-    let d = s[0].replace('-','.').replace('-', '.');
-    let v = s[1].split('.')[0];
-    return `${d} <span class='orange'>at</span> ${v}`;
+  formatNoteData(): string {
+    let date = this.note.timestamp;
+    let dueBy = this.note.expirationDate;
+    return `Note of user <b>${this.note.userId}</b> added on <b>${date}</b> due by <b>${dueBy}</b>`;
   }
 
   noteUpdateModal(content:any) {
