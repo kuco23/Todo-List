@@ -27,7 +27,7 @@ app.post('/note/new', (req, res, next) => {
     let key = randomKey()
     dbmodule.db.run(
         dbmodule.SQL_INSERT_NOTE_ROW, [
-            key, data.userId, data.content, 
+            key, data.userId, data.content,
             data.expirationDate, date
         ]
     )
@@ -39,7 +39,6 @@ app.post('/note/new', (req, res, next) => {
 app.post('/note/update', (req, res, next) => {
     let data = req.body
     let date = getTimestamp()
-    console.log('update');
     dbmodule.db.run(
         `UPDATE note SET content=?, timestamp=? WHERE id=?`,
         [data.content, date, data.id]

@@ -25,7 +25,6 @@ export class NotesComponent implements OnInit {
   getNotes(): void {
     this.apiService.getNotes().subscribe(
       (resp:Note[]) => {
-        console.log(resp);
         for (let note of resp)
           this.addedNotes.push(note);
       }
@@ -44,7 +43,7 @@ export class NotesComponent implements OnInit {
     }
   }
 
-  deleteNote(noteId): void {
+  deleteNote(noteId:number): void {
     for (let i = 0; i < this.addedNotes.length; i++)
       if (noteId == this.addedNotes[i].id) {
         this.addedNotes.splice(i,1);

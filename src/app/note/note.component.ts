@@ -26,7 +26,7 @@ export class NoteComponent implements OnInit {
   formatNoteData(): string {
     let date = this.note.timestamp;
     let dueBy = this.note.expirationDate;
-    return `Note of user <b>${this.note.userId}</b> added on <b>${date}</b> due by <b>${dueBy}</b>`;
+    return `Note of user <b>${this.note.userId}</b> added on <b>${date}</b>, due by <b>${dueBy}</b>`;
   }
 
   noteUpdateModal(content:any) {

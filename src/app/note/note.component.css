@@ -2,6 +2,15 @@
   background-color: rgba(0,0,0,.3);
 }
 
+.border-hover:hover {
+  border: 1px solid white;
+  background-color: inherit;
+}
+
+.border-radius {
+  border-radius: 5px;
+}
+
 p.text-break {
   white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
   white-space: -webkit-pre-wrap;          /* Chrome & Safari */
